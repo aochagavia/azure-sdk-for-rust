@@ -66,8 +66,8 @@ pub use seekable_stream::*;
 pub use sleep::sleep;
 
 // re-export important types at crate level
-pub use http_types::Method;
-pub use http_types::StatusCode;
+pub use http::Method;
+pub use http::StatusCode;
 pub use url::Url;
 
 /// A unique identifier for a request.

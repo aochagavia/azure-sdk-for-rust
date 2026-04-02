@@ -469,25 +469,25 @@ mod tests {
 
     #[test]
     fn matching_against_http_error() {
-        let kind = ErrorKind::http_response_from_body(StatusCode::ImATeapot, b"{}");
+        let kind = ErrorKind::http_response_from_body(StatusCode::IM_A_TEAPOT, b"{}");
 
         assert!(matches!(
             kind,
             ErrorKind::HttpResponse {
-                status: StatusCode::ImATeapot,
+                status: StatusCode::IM_A_TEAPOT,
                 error_code: None
             }
         ));
 
         let kind = ErrorKind::http_response_from_body(
-            StatusCode::ImATeapot,
+            StatusCode::IM_A_TEAPOT,
             br#"{"error": {"code":"teepot"}}"#,
         );
 
         assert!(matches!(
             kind,
             ErrorKind::HttpResponse {
-                status: StatusCode::ImATeapot,
+                status: StatusCode::IM_A_TEAPOT,
                 error_code
             }
             if error_code.as_deref() == Some("teepot")
