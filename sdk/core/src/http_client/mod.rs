@@ -1,11 +1,5 @@
-#[cfg(not(any(feature = "enable_reqwest", feature = "enable_reqwest_rustls")))]
-mod noop;
-#[cfg(any(feature = "enable_reqwest", feature = "enable_reqwest_rustls"))]
 mod reqwest;
 
-#[cfg(not(any(feature = "enable_reqwest", feature = "enable_reqwest_rustls")))]
-use self::noop::new_noop_client;
-#[cfg(any(feature = "enable_reqwest", feature = "enable_reqwest_rustls"))]
 use self::reqwest::new_reqwest_client;
 use crate::error::ErrorKind;
 use async_trait::async_trait;
@@ -15,14 +9,7 @@ use std::sync::Arc;
 
 /// Construct a new `HttpClient`
 pub fn new_http_client() -> Arc<dyn HttpClient> {
-    #[cfg(any(feature = "enable_reqwest", feature = "enable_reqwest_rustls"))]
-    {
-        new_reqwest_client()
-    }
-    #[cfg(not(any(feature = "enable_reqwest", feature = "enable_reqwest_rustls")))]
-    {
-        new_noop_client()
-    }
+    new_reqwest_client()
 }
 
 /// An HTTP client which can send requests.

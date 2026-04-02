@@ -15,29 +15,27 @@ edition = "2021"
 [dependencies]
 async-trait = "0.1"
 azure_core = { path = "../core", version = "0.19", features = ["xml"] }
-time = "0.3.10"
-tracing = "0.1.40"
+time = "0.3.47"
+tracing = "0.1.44"
 serde = "1.0"
 serde_derive = "1.0"
-url = "2.2"
-uuid = { version = "1.0", features = ["v4", "serde"] }
-bytes = "1.0"
+url = "2.5"
+uuid = { version = "1.23", features = ["v4", "serde"] }
+bytes = "1.11"
 RustyXML = "0.3"
-async-lock = "3.1"
+async-lock = "3.4"
 
 [dev-dependencies]
-tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.50", features = ["macros", "rt-multi-thread"] }
 tracing-subscriber = "0.3"
-reqwest = "0.12"
+reqwest = "0.13"
 mock_transport = { path = "../../eng/test/mock_transport" }
 azure_identity = { path = "../identity", default-features = false }
 
 [features]
-default = ["enable_reqwest", "hmac_rust"]
+default = ["hmac_rust"]
 test_e2e = []
 test_integration = []
-enable_reqwest = ["azure_core/enable_reqwest"]
-enable_reqwest_rustls = ["azure_core/enable_reqwest_rustls"]
 hmac_rust = ["azure_core/hmac_rust"]
 hmac_openssl = ["azure_core/hmac_openssl"]
 
